@@ -1,6 +1,10 @@
 <?php
+$sites = [
+  'webaim' => 'http://webaim.org/blog/feed/atom/',
+];
+
 header('Content-type: application/xml');
-$handle = fopen($_REQUEST['url'], "r");
+$handle = fopen($sites[$_REQUEST['feed']], "r");
 
 if ($handle) {
     while (!feof($handle)) {
