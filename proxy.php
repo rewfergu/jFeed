@@ -1,6 +1,8 @@
 <?php
 $sites = [
   'webaim' => 'http://webaim.org/blog/feed/atom/',
+  'copyright' => 'http://arllca.nonprofitsoapbox.com/news-from-lca?format=feed&type=rss',
+  'teachers' => 'http://www.loc.gov/rss/teachers/news.xml',
 ];
 
 header('Content-type: application/xml');

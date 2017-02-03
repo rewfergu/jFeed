@@ -19,13 +19,13 @@ jQuery(function() {
         url: 'xml/rss-20.xml',
         success: function(feed) {
         
-            jQuery('#result').append('<h2>'
-            + '<a href="'
-            + feed.link
-            + '">'
-            + feed.title
-            + '</a>'
-            + '</h2>');
+            // jQuery('#result').append('<h2>'
+            // + '<a href="'
+            // + feed.link
+            // + '">'
+            // + feed.title
+            // + '</a>'
+            // + '</h2>');
             
             var html = '';
             
@@ -41,13 +41,13 @@ jQuery(function() {
                 + '</a>'
                 + '</h3>';
                 
-                html += '<div class="updated">'
-                + item.updated
-                + '</div>';
+                // html += '<div class="updated">'
+                // + item.updated
+                // + '</div>';
                 
-                html += '<div>'
-                + item.description
-                + '</div>';
+                // html += '<div>'
+                // + item.description
+                // + '</div>';
             }
             
             jQuery('#result').append(html);
@@ -60,6 +60,7 @@ jQuery(function() {
 </head>
 <body>
 <h1>jFeed - jQuery feed parser plugin - example</h1>
+<h2>hello</h2>
 <div id="result" />
 </body>
 </html>
