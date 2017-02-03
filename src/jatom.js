@@ -14,6 +14,7 @@ JAtom.prototype = {
         this.description = jQuery(channel).find('subtitle:first').text();
         this.language = jQuery(channel).attr('xml:lang');
         this.updated = jQuery(channel).find('updated:first').text();
+        this.summary = jQuery(channel).find('summary:first').text();
         
         this.items = new Array();
         
@@ -25,6 +26,7 @@ JAtom.prototype = {
             
             item.title = jQuery(this).find('title').eq(0).text();
             item.link = jQuery(this).find('link').eq(0).attr('href');
+            item.summary = jQuery(this).find('summary').eq(0).text();
             item.description = jQuery(this).find('content').eq(0).text();
             item.updated = jQuery(this).find('updated').eq(0).text();
             item.id = jQuery(this).find('id').eq(0).text();

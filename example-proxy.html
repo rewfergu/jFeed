@@ -1,127 +1,103 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>jFeed - jQuery feed parser plugin - example</title>
-<style type="text/css">
-    h3 { margin-bottom: 5px; }
-    div.updated { color: #999; margin-bottom: 5px; font-size: 0.8em; }
-</style>
-<script type="text/javascript" src="jquery/jquery.js"></script>
-<script type="text/javascript" src="build/dist/jquery.jfeed.pack.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>jFeed - jQuery feed parser plugin - example</title>
+  <style type="text/css">
+    h3 {
+      margin-bottom: 5px;
+    }
+    
+    div.updated {
+      color: #999;
+      margin-bottom: 5px;
+      font-size: 0.8em;
+    }
+  </style>
+  <script type="text/javascript" src="jquery/jquery.js"></script>
+  <!--<script type="text/javascript" src="build/dist/jquery.jfeed.pack.js"></script>-->
+  <script src="src/jatom.js"></script>
+  <script src="src/jfeeditem.js"></script>
+  <script src="src/jrss.js"></script>
+  <script src="src/jfeed.js"></script>
+  <script type="text/javascript">
+    jQuery(function () {
 
-<script type="text/javascript">
-
-jQuery(function() {
-
-    jQuery.getFeed({
+      jQuery.getFeed({
         url: 'proxy.php?feed=webaim',
-        success: function(feed) {
-        
-            jQuery('#result').append('<h2>'
-            + '<a href="'
-            + feed.link
-            + '">'
-            + feed.title
-            + '</a>'
-            + '</h2>');
-            
+        success: function (feed) {
+          jQuery('#webaim').append(`<h4><a href="${feed.link}">WebAIM News</a></h4>`);
+
+          var html = '';
+
+          for (var i = 0; i < feed.items.length && i < 5; i++) {
+            var item = feed.items[i];
+
+            console.log('item', item);
+
+            html += `<div>
+            <a href="${item.link}">${item.title}</a>
+            <div>${item.summary}</div>
+            </div>`;
+          }
+
+          jQuery('#webaim').append(html);
+        }
+      });
+
+
+      jQuery.getFeed({
+        url: 'proxy.php?feed=copyright',
+        success: function (feed) {
+          jQuery('#copyright').append(`<h4><a href="${feed.link}">Library Copyright Alliance</a></h4>`);
+
+          var html = '';
+
+          for (var i = 0; i < feed.items.length && i < 5; i++) {
+            var item = feed.items[i];
+
+            console.log('item', item);
+
+            html += `<div>
+            <a href="${item.link}">${item.title}</a>
+            </div>`;
+          }
+
+          jQuery('#copyright').append(html);
+        }
+      });
+
+
+      jQuery.getFeed({
+          url: 'proxy.php?feed=teachers',
+          success: function (feed) {
+            jQuery('#teachers').append(`<h4><a href="${feed.link}">Copyright News for Teachers</a></h4>`);
+
             var html = '';
-            
-            for(var i = 0; i < feed.items.length && i < 5; i++) {
-            
-                var item = feed.items[i];
-                
-                html += '<h3>'
-                + '<a href="'
-                + item.link
-                + '">'
-                + item.title
-                + '</a>'
-                + '</h3>';
-                
-                html += '<div class="updated">'
-                + item.updated
-                + '</div>';
-                
-                html += '<div>'
-                + item.description
-                + '</div>';
+
+            for (var i = 0; i < feed.items.length && i < 5; i++) {
+              var item = feed.items[i];
+
+              console.log('item', item);
+
+              html += `<div>
+                <a href="${item.link}">${item.title}</a>
+              </div>`;
             }
-            
-            jQuery('#result').append(html);
-        }    
+
+            jQuery('#teachers').append(html);
+          }
+        });
     });
-});
-
-
-// feed.load(function(result) {
-//     if (!result.error) {
-//       //var container = document.getElementById("feed");
-//       var container = $('#feed2');
-//       container.append('<h4>WebAIM News</h4>');
-//       for (var i = 0; i < result.feed.entries.length; i++) {
-//         var entry = result.feed.entries[i];
-//         // var div = document.createElement("div");
-//         // div.appendChild(document.createTextNode(entry.title));
-//         // div.appendChild(document.createTextNode(entry.link));
-//         // div.appendChild(document.createTextNode(entry.contentSnippet));
-//         // container.appendChild(div);
-//         var text = '<div>';
-//         text += '<a href="' + entry.link + '">' + entry.title + '</a>';
-//         // text += '<p>' + entry.contentSnippet + '</p>';
-//         text += '</div>';
-//         container.append(text);
-//       }
-//       console.log(result.feed.entries);
-//     }
-//   });
-
-
-
-// feed.load(function(result) {
-//     if (!result.error) {
-//       var container = $('#feed1');
-//       container.append('<h5>Library Copyright Alliance</h5>');
-//       for (var i = 0; i < result.feed.entries.length; i++) {
-//         var entry = result.feed.entries[i];
-//         var text = '<div>';
-//         text += '<a href="' + entry.link + '">' + entry.title + '</a>';
-// 								text += '</div>';
-//         container.append(text);
-//       }
-//       console.log(result.feed.entries);
-//     }
-//   });
-
-// feed.load(function(result) {
-//     if (!result.error) {
-//       //var container = document.getElementById("feed");
-//       var container = $('#feed');
-//       container.append('<h5>Copyright News for Teachers</h5>');
-//       for (var i = 0; i < result.feed.entries.length; i++) {
-//         var entry = result.feed.entries[i];
-//         // var div = document.createElement("div");
-//         // div.appendChild(document.createTextNode(entry.title));
-//         // div.appendChild(document.createTextNode(entry.link));
-//         // div.appendChild(document.createTextNode(entry.contentSnippet));
-//         // container.appendChild(div);
-//         var text = '<div>';
-//         text += '<a href="' + entry.link + '">' + entry.title + '</a>';
-//         // text += '<p>' + entry.contentSnippet + '</p>';
-//         text += '</div>';
-//         container.append(text);
-//       }
-//       console.log(result.feed.entries);
-//     }
-//   });
-
-</script>
-
+  </script>
 </head>
+
 <body>
-<h1>jFeed - jQuery feed parser plugin - example</h1>
-<div id="result" />
+  <div id="webaim"></div>
+  <div id="copyright"></div>
+  <div id="teachers"></div>
 </body>
+
 </html>
